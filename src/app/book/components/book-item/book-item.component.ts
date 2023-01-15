@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BookService } from '../../service/book.service';
+import { Component, Input } from '@angular/core';
+import { Book } from '../../models/book';
 
 @Component({
   selector: 'app-book-item',
@@ -7,16 +7,12 @@ import { BookService } from '../../service/book.service';
   styleUrls: ['./book-item.component.scss']
 })
 export class BookItemComponent {
-  constructor(private bookService: BookService){
+  @Input() itemFromBookList : Book | undefined
+  
+  editItem(id:number){
+
   }
-  getListOfBooks(){
-    return this.bookService.getListOfBooks();
-  }
- 
-  edit(id:number){
-    
-  }
-  delete(id:number){
-    // return this.bookService.deleteElementById(id)
+  deleteItem(id:number){
+
   }
 }

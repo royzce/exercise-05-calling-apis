@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BlogService } from '../../service/blog.service';
+import { Component, Input } from '@angular/core';
+import { Blog } from '../../models/blog';
 
 @Component({
   selector: 'app-blog-item',
@@ -7,11 +7,12 @@ import { BlogService } from '../../service/blog.service';
   styleUrls: ['./blog-item.component.scss']
 })
 export class BlogItemComponent {
-  constructor(private blogService: BlogService){
-  }
-
-  getListOfBlog(){
-    return this.blogService.getListOfBlog()
-  }
+  @Input() itemFromBlogList : Blog | undefined
   
+  editItem(id:number){
+
+  }
+  deleteItem(id:number){
+
+  }
 }

@@ -1,1 +1,5 @@
-<p>blog-list works!</p>
+<div class="row">
+    <div *ngFor="let item of getListOfBlog()" class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-3 ">
+        <app-blog-item [itemFromBlogList]="item"></app-blog-item>
+    </div>
+</div>

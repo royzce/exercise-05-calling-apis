@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-
-export interface Book {
-  id: number;
-  name: string;
-  authors: string[];
-  isbn: string;
-}
+import { Book } from '../models/book';
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +9,21 @@ export class BookService {
   arrBooks: Book[] = [
     {
       id: 1,
-      name: 'Book 1',
+      name: 'Taming the Tiger',
       authors: ['James K.'],
-      isbn: 'isbn 1'
+      isbn: '1482333098'
     },
     {
       id: 2,
-      name: 'Book 2',
+      name: 'The Dog in th Park',
       authors: ['Lebron I.', 'Stephen K.', 'Loonie K.'],
-      isbn: 'isbn 2'
+      isbn: '4523993823'
     },
     {
       id: 3,
-      name: 'Book 3',
+      name: 'Amber Stones',
       authors: ['Kevin F.', 'Terence J.'],
-      isbn: 'isbn 3'
+      isbn: '3123455099'
     }
   ];
 

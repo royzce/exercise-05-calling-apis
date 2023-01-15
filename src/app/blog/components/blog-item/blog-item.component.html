@@ -1,9 +1,13 @@
-<h1>Blog Page</h1>
-
-<ul>
-    <li *ngFor="let item of getListOfBlog()" style="list-style: none">
-        <button >edit</button>
-        <button >delete</button>
-        {{item.title}} {{item.description}} {{item.author}} {{item.comments}}
-    </li>
-</ul>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{itemFromBlogList?.title}}</h4>
+        <p class="card-title text-muted">by {{itemFromBlogList?.author}}</p>
+        <p class="card-text">{{itemFromBlogList?.description}}</p>
+        <p>COMMENTS:</p>
+        <div *ngFor="let item of itemFromBlogList?.comments" class="justify-content-center border rounded-5 mb-3">
+            <p>{{item}}</p>
+        </div>
+        <a (click)="editItem(itemFromBlogList!.id)" class="btn btn-primary">Edit</a>
+        <a (click)="deleteItem(itemFromBlogList!.id)" class="btn btn-danger">Delete</a>
+    </div>
+</div>

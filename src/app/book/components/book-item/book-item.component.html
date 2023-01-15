@@ -1,9 +1,12 @@
-<h1>Book Page</h1>
-
-<ul>
-    <li *ngFor="let item of getListOfBooks()" style="list-style: none">
-        <button >edit</button>
-        <button >delete</button>
-        {{item.name}}, {{item.authors}}, {{item.isbn}}
-    </li>
-</ul>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{itemFromBookList?.name}}</h4>
+        <p class="card-title text-muted">by </p>
+        <div *ngFor="let item of itemFromBookList?.authors">
+            <p class="card-title text-muted">{{item}}</p>
+        </div>
+        <p class="card-text"><span class="text-muted">isbn: </span>{{itemFromBookList?.isbn}}</p>
+        <a (click)="editItem(itemFromBookList!.id)" class="btn btn-primary">Edit</a>
+        <a (click)="deleteItem(itemFromBookList!.id)" class="btn btn-danger">Delete</a>
+    </div>
+</div>
