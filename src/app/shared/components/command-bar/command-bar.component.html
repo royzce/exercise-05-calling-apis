@@ -1,5 +1,5 @@
-<div class="container text-center justify-content-center mt-5 m-3">
+<div class="navbar sticky-bottom text-center justify-content-center mt-5 m-3"
+    *ngIf="this.sharedService.toggleState$ | async">
     <button (click)="add()" class="btn btn-primary btn-lg"> Add </button>
     <button (click)="deleteAll()" class="btn btn-warning btn-lg"> Delete All</button>
-    
 </div>

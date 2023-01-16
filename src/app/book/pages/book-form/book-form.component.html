@@ -1,0 +1,23 @@
+<div class="pt-5 d-flex justify-content-center ">
+    <form [formGroup]="bookForm" class="w-49 card p-3 bg-light" >
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" formControlName="name" class="form-control" placeholder="The Book">
+        </div>
+        <ng-container formArrayName="authors">
+            <label for="authors">Authors</label>
+            <div class="input-group mb-3" *ngFor="let _ of authorsArray.controls; index as i">
+                <input [formControlName]="i" class="form-control" placeholder="Input Author...">
+                <button type="button" (click)="deleteAuthor(i)" class="btn btn-danger">Delete</button>
+            </div>
+            <button type="button" (click)="addAuthor()" class="btn btn-info">Add</button>
+            <br/>
+        </ng-container>
+
+        <div class="mb-3">
+            <label for="isbn" class="form-label">ISBN</label>
+            <input type="text" formControlName="isbn" class="form-control" placeholder="Input isbn...">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

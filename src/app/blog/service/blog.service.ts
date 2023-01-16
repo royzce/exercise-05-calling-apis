@@ -19,13 +19,13 @@ export class BlogService {
       title: 'Do Nots',
       description: 'purred on by my observations at work, I have come up with a list of things to avoid as a doctor in a hospital setting (especially for interns and medical students). Don\'t wear jeans under your white coat. Its unprofessional.',
       author: 'James Smith',
-      comments: ['Very good my guy', 'Nice I did not thing that it will work']
+      comments: ['Very good my guy', 'Nice I did not think that it will work']
     },
     {
       id: 3,
       title: 'Times they are a changin\'',
       description: 'Major changes have recently occured in my life, both personally and professionally. We\'re approaching five years since the inception of this blog, and going back to read the posts from May 04 is quite the experience.',
-      author: 'Author 3',
+      author: 'Rose Lin',
       comments: ['Awesome content', 'Cool very inspiring']
     }
   ]

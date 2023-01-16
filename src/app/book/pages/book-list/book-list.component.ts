@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { BookService } from '../../service/book.service';
 
 @Component({
@@ -6,8 +7,11 @@ import { BookService } from '../../service/book.service';
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent {
-  constructor(private bookService: BookService){
+export class BookListComponent implements AfterViewInit{
+  constructor(private bookService: BookService, public sharedService: SharedService){
+  }
+  ngAfterViewInit(): void {
+    this.sharedService.showElement()
   }
   getListOfBooks(){
     return this.bookService.getListOfBooks();

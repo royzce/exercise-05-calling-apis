@@ -1,13 +1,14 @@
-<ul class="nav justify-content-center m-3">
+<ul class="nav navbar-dark sticky-top justify-content-center pt-3 pb-3 background">
     <div class="row">
         <li class="nav-item col">
-            <a class="nav-link btn btn-outline-primary " [routerLink]="['/book']">Book</a>
+            <a (click)="showCommandBar()" class="nav-link btn btn-outline-primary bg-light" [routerLink]="['/book']">Book</a>
         </li>
         <li class="nav-item col">
-            <a class="nav-link btn btn-outline-primary" [routerLink]="['/blog']">Blog</a>
+            <a (click)="showCommandBar()" class="nav-link btn btn-outline-primary bg-light" [routerLink]="['/blog']">Blog</a>
         </li>
         <li class="nav-item col">
-            <a class="nav-link btn btn-outline-primary" [routerLink]="['/form']">Profile</a>
+            <a (click)="hideCommandBar()" class="nav-link btn btn-outline-primary bg-light" [routerLink]="['/profile']">Profile</a>
         </li>
     </div>
 </ul>
+

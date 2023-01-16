@@ -10,9 +10,15 @@ const routes: Routes = [
     component: BookListComponent
   },
   {
-    path: 'form',
-    component: BookFormComponent,
-  }
+    path: 'book',
+    children : [
+      {
+        path: 'form',
+        component: BookFormComponent
+      }
+    ]
+  },
+
 ];
 
 @NgModule({
