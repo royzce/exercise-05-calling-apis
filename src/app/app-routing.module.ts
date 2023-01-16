@@ -8,12 +8,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'book',
+    path: '',
     loadChildren: () => import('./book/book.module')
     .then(m => m.BookModule)
   },
   {
-    path: 'blog',
+    path: '',
     loadChildren: () => import('./blog/blog.module')
     .then(m => m.BlogModule)
 

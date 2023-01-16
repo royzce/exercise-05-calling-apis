@@ -10,7 +10,7 @@ import { CommandBarComponent } from './shared/components/command-bar/command-bar
   declarations: [
     AppComponent,
     HeaderComponent,
-    CommandBarComponent
+    // CommandBarComponent
   ],
   imports: [
     BrowserModule,

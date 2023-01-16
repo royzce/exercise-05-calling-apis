@@ -11,8 +11,14 @@ export class CommandBarComponent {
   @Input () data : any 
   @Output () actionEmitter = new EventEmitter<any>();
 
-  sendAction(){
-    console.log(this.data)
-    this.actionEmitter.emit(this.data);
+  // sendAction(){
+  //   console.log(this.data)
+  //   this.actionEmitter.emit(this.data);
+  // }
+  add(){
+
+  }
+  deleteAll(){
+    
   }
 }

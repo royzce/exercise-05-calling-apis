@@ -5,7 +5,7 @@ import { BlogListComponent } from './pages/blog-list/blog-list.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'blog',
     component: BlogListComponent
   }
 ];
