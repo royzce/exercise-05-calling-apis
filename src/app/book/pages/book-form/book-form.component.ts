@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from 'src/app/shared/services/shared.service';
+import { BookService } from '../../service/book.service';
 
 @Component({
   selector: 'app-book-form',
@@ -10,7 +11,7 @@ import { SharedService } from 'src/app/shared/services/shared.service';
 export class BookFormComponent implements AfterViewInit {
   bookForm : FormGroup
   authorsArray  : FormArray
-  constructor(private formBuilder : FormBuilder ,public sharedService: SharedService){
+  constructor(private formBuilder : FormBuilder ,public sharedService: SharedService,private bookService: BookService){
     this.bookForm = this.formBuilder.group({
       name: [''],
       authors: this.formBuilder.array([new FormControl('')]),
@@ -25,8 +26,15 @@ export class BookFormComponent implements AfterViewInit {
   addAuthor = () => {
     this.authorsArray.push(new FormControl())
   }
-
   deleteAuthor = (i:number) => {
     this.authorsArray.removeAt(i)
+  }
+  onSubmit(){
+    console.log(this.bookForm.value)
+    var generateId = this.bookService.arrBooks.length+1
+    this.bookService.arrBooks.push({"id":generateId,"name":this.bookForm.value.name,
+      "authors":this.bookForm.value.authors,
+      "isbn":this.bookForm.value.isbn,})
+    console.log(this.bookService.arrBooks)
   }
 }

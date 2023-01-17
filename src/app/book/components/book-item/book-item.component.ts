@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Book } from '../../models/book';
+import { BookService } from '../../service/book.service';
 
 @Component({
   selector: 'app-book-item',
@@ -8,9 +9,9 @@ import { Book } from '../../models/book';
 })
 export class BookItemComponent {
   @Input() itemFromBookList : Book | undefined
-  
+  constructor(){  }
   editItem(id:number){
-
+    console.log(this.itemFromBookList)
   }
   deleteItem(id:number){
 
