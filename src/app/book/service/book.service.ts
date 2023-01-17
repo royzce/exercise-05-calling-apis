@@ -28,6 +28,16 @@ export class BookService {
     }
   ];
 
+  removeDuplicates(){
+    // console.log(Object.values(this.arrBooks.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{})))
+    this.arrBooks = Object.values(this.arrBooks.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{}))
+  }
+  deleteObj(id:number){
+    this.arrBooks = this.arrBooks.filter( obj => obj.id !== id);
+  }
+  deleteAllObj(){
+    this.arrBooks = []
+  }
   getListOfBooks(){
     return this.arrBooks;
   }

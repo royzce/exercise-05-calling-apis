@@ -16,17 +16,17 @@ export class BookListComponent implements OnInit{
     { name: "Delete All", callback: this.deleteAll},
   ];
 
-  executeFunction(mainFunction:(router:Router) => void){
-    mainFunction(this.router)
+  executeFunction(mainFunction:(router:Router, bookService:BookService) => void){
+    mainFunction(this.router,this.bookService)
   }
   editFunction(id:number){
     this.router.navigate(['book/form'], {queryParams: {id:id}})
   }
-  add(router:Router){
+  add(router:Router,bookService:BookService){
     router.navigate(['book/form'])
   }
-  deleteAll(){
-    console.log("DELETE ALL");
+  deleteAll(router:Router,bookService:BookService){
+    bookService.deleteAllObj()
   }
 
   getListOfBooks(){

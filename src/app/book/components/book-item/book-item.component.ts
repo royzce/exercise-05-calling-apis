@@ -10,13 +10,12 @@ import { BookService } from '../../service/book.service';
 export class BookItemComponent {
   @Input() itemFromBookList : Book | undefined
   @Output() actionEmitter = new EventEmitter<any>();
-  constructor(){  }
+  constructor(private bookService: BookService){  }
   editItem(id:number){
-    console.log(this.itemFromBookList)
     this.actionEmitter.emit(id)
   }
   deleteItem(id:number){
-
+    this.bookService.deleteObj(id)
   }
   sendAction(){
     this.actionEmitter.emit(this.itemFromBookList)

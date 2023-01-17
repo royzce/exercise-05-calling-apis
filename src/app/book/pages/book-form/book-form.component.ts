@@ -18,7 +18,7 @@ export class BookFormComponent implements AfterViewInit {
               private route: ActivatedRoute){
     this.bookForm = this.formBuilder.group({
       name: [''],
-      authors: this.formBuilder.array([new FormControl('')]),
+      authors: this.formBuilder.array([]),
       isbn: ['']
 
     })
@@ -28,22 +28,12 @@ export class BookFormComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.id = +this.route.snapshot.queryParams['id']
     this.populateFormById()
-    console.log('afterview')
   }
   populateFormById(){
-
     if(this.id === undefined || Number.isNaN(this.id)){
-      console.log(this.id)
-      console.log(this.bookService.arrBooks.find(book => book.id === 3)?.name)
       return
     }
     this.patchForm()
-    // this.bookForm = this.formBuilder.group({
-    //   name: [this.bookService.arrBooks.find(book => book.id === this.id)?.name],
-    //   authors: this.formBuilder.array(this.bookService.arrBooks.find(book => book.id === this.id)!.authors),
-    //   isbn: ['']
-
-    // })
   }
 
   patchForm(){
@@ -66,14 +56,14 @@ export class BookFormComponent implements AfterViewInit {
     this.authorsArray.removeAt(i)
   }
   onSubmit(){
-    // console.log(this.route.snapshot.params)
-    // console.log(this.route.snapshot.queryParams['id'])
-    
-    // console.log(this.bookForm.value)
-    var generateId = this.bookService.arrBooks.length+1
+    // var generateId = this.bookService.arrBooks.length+1
+    var generateId = this.id
+    if(Number.isNaN(generateId) || generateId === undefined){
+      generateId = this.bookService.arrBooks.length+1
+    }
     this.bookService.arrBooks.push({"id":generateId,"name":this.bookForm.value.name,
       "authors":this.bookForm.value.authors,
       "isbn":this.bookForm.value.isbn,})
-    // console.log(this.bookService.arrBooks)
+    this.bookService.removeDuplicates()
   }
 }
