@@ -60,7 +60,9 @@ export class BookFormComponent implements AfterViewInit {
     if(Number.isNaN(generateId) || generateId === undefined){
       generateId = this.bookService.arrBooks.length+1
     }
-    this.bookService.arrBooks.push({"id":generateId,"name":this.bookForm.value.name,
+    this.bookService.arrBooks.push({
+      "id":generateId,
+      "name":this.bookForm.value.name,
       "authors":this.bookForm.value.authors,
       "isbn":this.bookForm.value.isbn,})
     this.bookService.removeDuplicates()
