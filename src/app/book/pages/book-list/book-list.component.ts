@@ -19,7 +19,9 @@ export class BookListComponent implements OnInit{
   executeFunction(mainFunction:(router:Router) => void){
     mainFunction(this.router)
   }
-
+  editFunction(id:number){
+    this.router.navigate(['book/form'], {queryParams: {id:id}})
+  }
   add(router:Router){
     router.navigate(['book/form'])
   }

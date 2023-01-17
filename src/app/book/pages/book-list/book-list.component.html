@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
 <div class="row">
     <div *ngFor="let item of getListOfBooks()" class="col-lg-3 col-md-4 col-sm-12 col-xs-12 mt-3 ">
-        <app-book-item [itemFromBookList]="item"></app-book-item>
+        <app-book-item [itemFromBookList]="item" (actionEmitter)="editFunction($event)"></app-book-item>
     </div>
 </div>
 <app-command-bar (actionEmitter)="executeFunction($event)" [buttons]="buttons"></app-command-bar>

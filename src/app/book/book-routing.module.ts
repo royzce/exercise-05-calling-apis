@@ -18,6 +18,15 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'book',
+    children : [
+      {
+        path: 'form/:id',
+        component: BookFormComponent
+      }
+    ]
+  },
 
 ];
 
