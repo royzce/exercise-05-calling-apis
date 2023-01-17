@@ -56,7 +56,6 @@ export class BookFormComponent implements AfterViewInit {
     this.authorsArray.removeAt(i)
   }
   onSubmit(){
-    // var generateId = this.bookService.arrBooks.length+1
     var generateId = this.id
     if(Number.isNaN(generateId) || generateId === undefined){
       generateId = this.bookService.arrBooks.length+1
