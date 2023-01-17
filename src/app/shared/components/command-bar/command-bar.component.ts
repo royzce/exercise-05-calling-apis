@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { SharedService } from '../../services/shared.service';
 export class CommandBarComponent{
   @Input() buttons: any[] | undefined;
   @Output () actionEmitter = new EventEmitter<any>();
-  constructor (public sharedService:SharedService, private router:Router) {  }
+  constructor (public sharedService:SharedService) {  }
 
   onClick(button: any) {
     this.actionEmitter.emit(button.callback);
