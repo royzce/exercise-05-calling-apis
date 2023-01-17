@@ -18,7 +18,7 @@ export class BookFormComponent implements AfterViewInit {
               private route: ActivatedRoute){
     this.bookForm = this.formBuilder.group({
       name: [''],
-      authors: this.formBuilder.array([new FormControl(''), new FormControl('')]),
+      authors: this.formBuilder.array([new FormControl('')]),
       isbn: ['']
 
     })
@@ -31,16 +31,32 @@ export class BookFormComponent implements AfterViewInit {
     console.log('afterview')
   }
   populateFormById(){
+
     if(this.id === undefined || Number.isNaN(this.id)){
       console.log(this.id)
       console.log(this.bookService.arrBooks.find(book => book.id === 3)?.name)
       return
     }
-    this.bookForm = this.formBuilder.group({
-      name: [this.bookService.arrBooks.find(book => book.id === this.id)?.name],
-      authors: this.formBuilder.array(this.bookService.arrBooks.find(book => book.id === this.id)!.authors),
-      isbn: ['']
+    this.patchForm()
+    // this.bookForm = this.formBuilder.group({
+    //   name: [this.bookService.arrBooks.find(book => book.id === this.id)?.name],
+    //   authors: this.formBuilder.array(this.bookService.arrBooks.find(book => book.id === this.id)!.authors),
+    //   isbn: ['']
 
+    // })
+  }
+
+  patchForm(){
+    this.bookForm.patchValue({
+      name: this.bookService.arrBooks.find(book => book.id === this.id)?.name,
+      isbn: this.bookService.arrBooks.find(book => book.id === this.id)?.isbn,
+    })
+    this.setAuthors()
+  }
+  setAuthors(){
+    let control = <FormArray>this.bookForm.controls['authors']
+    this.bookService.arrBooks.find(book => book.id === this.id)?.authors.forEach(data => {
+      control.push(new FormControl(data))
     })
   }
   addAuthor = () => {
