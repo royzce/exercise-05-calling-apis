@@ -4,4 +4,4 @@
         <app-book-item [itemFromBookList]="item"></app-book-item>
     </div>
 </div>
-
+<app-command-bar (actionEmitter)="executeFunction($event)" [buttons]="buttons"></app-command-bar>

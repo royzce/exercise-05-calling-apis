@@ -1,5 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { SharedService } from 'src/app/shared/services/shared.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BookService } from '../../service/book.service';
 
 @Component({
@@ -7,12 +7,26 @@ import { BookService } from '../../service/book.service';
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent implements AfterViewInit{
-  constructor(private bookService: BookService, public sharedService: SharedService){
+export class BookListComponent implements OnInit{
+  constructor(private bookService: BookService, private router:Router){  }
+  ngOnInit() {  }
+
+  buttons = [
+    { name: "Add", callback: this.add},
+    { name: "Delete All", callback: this.deleteAll},
+  ];
+
+  executeFunction(mainFunction:(router:Router) => void){
+    mainFunction(this.router)
   }
-  ngAfterViewInit(): void {
-    this.sharedService.showElement()
+
+  add(router:Router){
+    router.navigate(['book/form'])
   }
+  deleteAll(){
+    console.log("DELETE ALL");
+  }
+
   getListOfBooks(){
     return this.bookService.getListOfBooks();
   }

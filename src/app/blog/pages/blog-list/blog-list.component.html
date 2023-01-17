@@ -3,4 +3,5 @@
         <app-blog-item [itemFromBlogList]="item"></app-blog-item>
     </div>
 </div>
+<app-command-bar (actionEmitter)="executeFunction($event)" [buttons]="buttons"></app-command-bar>
 

@@ -20,7 +20,7 @@ export class BookFormComponent implements AfterViewInit {
     this.authorsArray = this.bookForm.get('authors') as FormArray;
   }
   ngAfterViewInit(): void {
-    this.sharedService.hideElement()
+    
   }
   addAuthor = () => {
     this.authorsArray.push(new FormControl())

@@ -6,17 +6,17 @@ import { Subject } from 'rxjs';
 })
 export class SharedService {
 
-  constructor() { }
-  private toggleState = new Subject();
-  public toggleState$ = this.toggleState.asObservable();
-  private toggleVal = false;
+  // constructor() { }
+  // private toggleState = new Subject();
+  // public toggleState$ = this.toggleState.asObservable();
+  // private toggleVal = false;
 
-  hideElement(){
-    this.toggleVal = false;
-    this.toggleState.next(this.toggleVal);
-  }
-  showElement(){
-    this.toggleVal = true;
-    this.toggleState.next(this.toggleVal);
-  }
+  // hideElement(){
+  //   this.toggleVal = false;
+  //   this.toggleState.next(this.toggleVal);
+  // }
+  // showElement(){
+  //   this.toggleVal = true;
+  //   this.toggleState.next(this.toggleVal);
+  // }
 }

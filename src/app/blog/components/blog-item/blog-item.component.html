@@ -7,6 +7,8 @@
         <div *ngFor="let item of itemFromBlogList?.comments" class="justify-content-center border rounded-5 mb-3">
             <p>{{item}}</p>
         </div>
+    </div>
+    <div class="card-footer">
         <a (click)="editItem(itemFromBlogList!.id)" class="btn btn-primary">Edit</a>
         <a (click)="deleteItem(itemFromBlogList!.id)" class="btn btn-danger">Delete</a>
     </div>

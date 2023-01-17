@@ -7,8 +7,7 @@ import { SharedService } from 'src/app/shared/services/shared.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements AfterViewInit {
-  constructor(private sharedService : SharedService){}
+  constructor(){}
   ngAfterViewInit(): void {
-    this.sharedService.hideElement()
   }
 }

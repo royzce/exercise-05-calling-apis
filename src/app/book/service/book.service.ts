@@ -16,7 +16,7 @@ export class BookService {
     },
     {
       id: 2,
-      name: 'The Dog in th Park',
+      name: 'The Dog in the Park',
       authors: ['Lebron I.', 'Stephen K.', 'Loonie K.'],
       isbn: '4523993823'
     },
