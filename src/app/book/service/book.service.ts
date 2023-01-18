@@ -42,5 +42,4 @@ export class BookService {
     return this.arrBooks;
   }
   
-  constructor() { }
 }

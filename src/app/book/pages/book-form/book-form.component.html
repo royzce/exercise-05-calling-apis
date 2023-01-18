@@ -10,7 +10,7 @@
                 <input [formControlName]="i" class="form-control" placeholder="Input Author...">
                 <button type="button" (click)="deleteAuthor(i)" class="btn btn-danger">Delete</button>
             </div>
-            <button type="button" (click)="addAuthor()" class="btn btn-info">Add</button>
+            <button type="button" (click)="addAuthor()" class="btn btn-info">Add Author</button>
             <br/>
         </ng-container>
 
@@ -18,6 +18,17 @@
             <label for="isbn" class="form-label">ISBN</label>
             <input type="text" formControlName="isbn" class="form-control" placeholder="Input isbn...">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#submitModal">Submit</button>
     </form>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="submitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Success!!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
 </div>

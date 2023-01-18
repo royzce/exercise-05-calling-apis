@@ -1,6 +1,5 @@
-<h1>Profile Page</h1>
 
-<form action="">
+<!-- <form action="">
     <label for="emailId">Email:</label><br>
     <input type="email" id="emailId"><br>
     <label for="nameId">Name:</label><br>
@@ -11,5 +10,25 @@
     <input type="text" id="activeId"  ><br>
 
     <input type="submit" value="Submit">
-</form> 
-  
+</form>  -->
+<div class="pt-5 d-flex justify-content-center ">
+    <form [formGroup]="userForm" class="formWidth card p-3 bg-light" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" formControlName="email" class="form-control" placeholder="juan@gmail.com">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" formControlName="name" class="form-control" placeholder="Juan">
+        </div>
+        <div class="mb-3">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea formControlName="bio" class="form-control"  rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="active" class="form-label">Active</label>
+            <input type="text" formControlName="active" class="form-control" placeholder="">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

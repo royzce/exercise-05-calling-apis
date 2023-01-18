@@ -1,6 +1,6 @@
 <div class="row">
     <div *ngFor="let item of getListOfBlog()" class="col-lg-3 col-md-4 col-sm-12 col-xs-12 mt-3 ">
-        <app-blog-item [itemFromBlogList]="item"></app-blog-item>
+        <app-blog-item [itemFromBlogList]="item" (actionEmitter)="editFunction($event)"></app-blog-item>
     </div>
 </div>
 <app-command-bar (actionEmitter)="executeFunction($event)" [buttons]="buttons"></app-command-bar>

@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { SharedService } from 'src/app/shared/services/shared.service';
 import { BookService } from '../../service/book.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class BookFormComponent implements AfterViewInit {
   bookForm : FormGroup
   authorsArray  : FormArray
   constructor(private formBuilder : FormBuilder,
-              public sharedService: SharedService,
               private bookService: BookService,
               private route: ActivatedRoute){
     this.bookForm = this.formBuilder.group({

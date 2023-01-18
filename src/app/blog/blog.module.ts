@@ -4,6 +4,8 @@ import { BlogListComponent } from './pages/blog-list/blog-list.component';
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { BlogRoutingModule } from './blog-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { BlogFormComponent } from './pages/blog-form/blog-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,13 +13,15 @@ import { SharedModule } from '../shared/shared.module';
     declarations: [
         BlogListComponent,
         BlogItemComponent,
+        BlogFormComponent,
         
         
     ],
     imports: [
         CommonModule,
         BlogRoutingModule,
-        SharedModule,
+        ReactiveFormsModule,
+        SharedModule
     ]
 })
 export class BlogModule { }

@@ -1,4 +1,6 @@
 import { AfterViewInit, OnInit, Component} from '@angular/core';
+import { Router } from '@angular/router';
+import { BookService } from 'src/app/book/service/book.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { BlogService } from '../../service/blog.service';
 
@@ -8,24 +10,25 @@ import { BlogService } from '../../service/blog.service';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit{
-  constructor(private blogService: BlogService){ }
+  constructor(private blogService: BlogService, private router:Router){ }
   ngOnInit() {  } 
   buttons = [
     { name: "Add", callback: this.add},
     { name: "Delete All", callback: this.deleteAll},
   ];
 
-  executeFunction(mainFunction:any){
-    mainFunction()
+  executeFunction(mainFunction:(router:Router, blogService:BlogService) => void){
+    mainFunction(this.router,this.blogService)
   }
-
-  add(){
-    console.log("ADD");
+  editFunction(id:number){
+    this.router.navigate(['blog/form'], {queryParams: {id:id}})
   }
-  deleteAll(){
-    console.log("DELETE ALL");
+  add(router:Router, blogService:BlogService){
+    router.navigate(['blog/form'])
   }
-  
+  deleteAll(router:Router, blogService:BlogService){
+    blogService.deleteAllObj()
+  }
   
 
   getListOfBlog(){

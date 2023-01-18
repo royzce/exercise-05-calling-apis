@@ -29,8 +29,16 @@ export class BlogService {
       comments: ['Awesome content', 'Cool very inspiring']
     }
   ]
+  deleteObj(id:number){
+    this.arrBlog = this.arrBlog.filter( obj => obj.id !== id);
+  }
   getListOfBlog(){
     return this.arrBlog;
   }
-  constructor() { }
+  deleteAllObj(){
+    this.arrBlog = []
+  }
+  removeDuplicates(){
+    this.arrBlog = Object.values(this.arrBlog.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{}))
+  }
 }

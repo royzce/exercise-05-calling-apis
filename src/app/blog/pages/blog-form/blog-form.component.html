@@ -1,0 +1,38 @@
+
+<div class="pt-5 d-flex justify-content-center ">
+    <form [formGroup]="blogForm" class="formWidth card p-3 bg-light" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" formControlName="title" class="form-control" placeholder="Blog Title">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea formControlName="description" class="form-control"  rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" formControlName="author" class="form-control" placeholder="Input Author...">
+        </div>
+        <ng-container formArrayName="comments">
+            <label for="comments">Comments</label>
+            <div class="input-group mb-3" *ngFor="let _ of commentsArray.controls; index as i">
+                <input [formControlName]="i" class="form-control" placeholder="Input Comment...">
+                <button type="button" (click)="deleteComment(i)" class="btn btn-danger">Delete</button>
+            </div>
+            <button type="button" (click)="addComment()" class="btn btn-info">Add Comment</button>
+            <br/>
+        </ng-container>
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#submitModal">Submit</button>
+    </form>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="submitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Success!!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+</div>
