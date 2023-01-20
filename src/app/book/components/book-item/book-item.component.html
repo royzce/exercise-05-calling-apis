@@ -8,7 +8,7 @@
         <p class="card-text"><span class="text-muted">isbn: </span>{{itemFromBookList?.isbn}}</p>
     </div>
     <div class="card-footer">
-        <a (click)="editItem(itemFromBookList!.id)" class="btn btn-primary">Edit</a>
-        <a (click)="deleteItem(itemFromBookList!.id)" class="btn btn-danger">Delete</a>
+        <a (click)="executeAction(itemFromBookList!.id, 'edit')" class="btn btn-primary">Edit</a>
+        <a (click)="executeAction(itemFromBookList!.id, 'delete')" class="btn btn-danger">Delete</a>
     </div>
 </div>

@@ -1,7 +1,4 @@
 <div class="navbar sticky-bottom text-center justify-content-center mt-5">
-      <div *ngFor="let button of buttons" [ngSwitch]="button.name" class="m-3">
-        <button (click)="onClick(button)" *ngSwitchCase="'Add'" class="btn btn-primary btn-lg">{{button.name}}</button>
-        <button (click)="onClick(button)" *ngSwitchCase="'Delete All'" class="btn btn-warning btn-lg">{{button.name}}</button>
-        <button *ngSwitchDefault >{{button.name}}</button>
-      </div>
+        <button (click)="executeAction('add')" class="btn btn-primary btn-lg">Add</button>
+        <button (click)="executeAction('deleteAll')" class="btn btn-warning btn-lg">Delete All</button>
 </div>

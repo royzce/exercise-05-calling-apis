@@ -1,0 +1,82 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "Onomatopaea",
+      "authors": [
+        "Miggy McFlurry",
+        "Teslo Nikky"
+      ],
+      "isbn": "1237438447"
+    },
+    {
+      "id": 2,
+      "name": "Selachimorpha",
+      "authors": [
+        "Preston Gibson",
+        "James Friedrich"
+      ],
+      "isbn": "1237438447"
+    },
+    {
+      "id": 3,
+      "name": "Harbor After",
+      "authors": [
+        "Jobstone Terence",
+        "Rudolf Schemiender"
+      ],
+      "isbn": "6774114490"
+    },
+    {
+      "id": 4,
+      "name": "FairyTail",
+      "authors": [
+        "Natsu"
+      ],
+      "isbn": "3439823881"
+    },
+    {
+      "name": "Asero",
+      "authors": [
+        "Bertong Karding"
+      ],
+      "isbn": "3284973244",
+      "id": 5
+    }
+  ],
+  "blogs": [
+    {
+      "id": 1,
+      "title": "That Microsoft deal isn’t exclusive, video is coming and more from OpenAI CEO Sam Altman",
+      "description": "OpenAI co-founder and CEO Sam Altman sat down for a wide-ranging interview with this editor late last week, answering questions about some of his most ambitious personal investments, as well as about the future of OpenAI.",
+      "author": "Connie Loizos",
+      "comments": [
+        "Good discussion my friend",
+        "Thanks for the info",
+        "I never found any stunning article like yours."
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Mailchimp says it was hacked — again",
+      "description": "Email marketing and newsletter giant Mailchimp says it was hacked and that dozens of customers’ data was exposed.",
+      "author": "Zack Whittaker",
+      "comments": [
+        "Oh my god, is this true",
+        "Hmmm.. Again?",
+        "Good info"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Shein valuation reportedly plummets by a third as it seeks $3B",
+      "description": "Shein, the fast fashion behemoth that has swept across the world, is raising a significant down round as the startup world braces for a funding crunch.",
+      "author": "Rita Liao",
+      "comments": [
+        "This is interesting",
+        "Oh no",
+        "Nice talk"
+      ]
+    }
+  ]
+}

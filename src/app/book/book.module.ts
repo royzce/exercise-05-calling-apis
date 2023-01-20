@@ -19,7 +19,7 @@ import { SharedModule } from "../shared/shared.module";
         CommonModule,
         BookRoutingModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
     ]
 })
 export class BookModule {

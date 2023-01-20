@@ -1,14 +1,15 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../service/book.service';
-
+import { Book } from '../../models/book';
+import { max, scan } from 'rxjs/operators';
 @Component({
   selector: 'app-book-form',
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.scss']
 })
-export class BookFormComponent implements AfterViewInit {
+export class BookFormComponent implements AfterViewInit, OnInit {
   bookForm : FormGroup
   authorsArray  : FormArray
   constructor(private formBuilder : FormBuilder,
@@ -23,6 +24,16 @@ export class BookFormComponent implements AfterViewInit {
     this.authorsArray = this.bookForm.get('authors') as FormArray;
   }
   id : number | undefined
+  highestID!: number; 
+  
+  ngOnInit(): void {
+    this.bookService.getBooks().subscribe((book:Book[]) => {
+      this.highestID = Math.max(...book.map(b => b.id))
+
+      // console.log(this.highestID)
+    })
+    
+  }
   ngAfterViewInit(): void {
     this.id = +this.route.snapshot.queryParams['id']
     this.populateFormById()
@@ -35,16 +46,20 @@ export class BookFormComponent implements AfterViewInit {
   }
 
   patchForm(){
-    this.bookForm.patchValue({
-      name: this.bookService.arrBooks.find(book => book.id === this.id)?.name,
-      isbn: this.bookService.arrBooks.find(book => book.id === this.id)?.isbn,
+    this.bookService.getBooks().subscribe((res:any) => {
+      let filteredBook = res.find((book: Book) => book.id === this.id)
+      this.bookForm.patchValue({
+        name: filteredBook.name,
+        isbn: filteredBook.isbn
+      })
     })
     this.setAuthors()
   }
   setAuthors(){
     let control = <FormArray>this.bookForm.controls['authors']
-    this.bookService.arrBooks.find(book => book.id === this.id)?.authors.forEach(data => {
-      control.push(new FormControl(data))
+    this.bookService.getBooks().subscribe((res:any) => {
+      res.find((book: Book) => book.id == this.id).authors.
+      forEach((authors: any) => control.push(new FormControl(authors)))
     })
   }
   addAuthor = () => {
@@ -53,16 +68,29 @@ export class BookFormComponent implements AfterViewInit {
   deleteAuthor = (i:number) => {
     this.authorsArray.removeAt(i)
   }
+  
   onSubmit(){
     var generateId = this.id
-    if(Number.isNaN(generateId) || generateId === undefined){
-      generateId = this.bookService.arrBooks.length+1
+    let book:any = {
+      name: this.bookForm.value.name,
+      authors: this.bookForm.value.authors,
+      isbn: this.bookForm.value.isbn
     }
-    this.bookService.arrBooks.push({
-      "id":generateId,
-      "name":this.bookForm.value.name,
-      "authors":this.bookForm.value.authors,
-      "isbn":this.bookForm.value.isbn,})
-    this.bookService.removeDuplicates()
+    if(Number.isNaN(generateId) || generateId === undefined){
+      //create Book
+      generateId = this.highestID+1
+      
+      book.id = generateId
+      this.bookService.createBook(book).subscribe()
+    }{
+      //update Book
+
+    }
+    // this.bookService.arrBooks.push({
+    //   "id":generateId,
+    //   "name":this.bookForm.value.name,
+    //   "authors":this.bookForm.value.authors,
+    //   "isbn":this.bookForm.value.isbn,})
+    // this.bookService.removeDuplicates()
   }
 }

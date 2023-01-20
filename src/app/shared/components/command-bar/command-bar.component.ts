@@ -7,12 +7,13 @@ import { SharedService } from '../../services/shared.service';
   styleUrls: ['./command-bar.component.scss']
 })
 export class CommandBarComponent{
-  @Input() buttons: any[] | undefined;
   @Output () actionEmitter = new EventEmitter<any>();
-  constructor (public sharedService:SharedService) {  }
+  constructor () {  }
 
-  onClick(button: any) {
-    this.actionEmitter.emit(button.callback);
+  executeAction(action:string) {
+    this.actionEmitter.emit({action});
   }
+
+  
   
 }

@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Book } from '../models/book';
 
 @Injectable({
@@ -7,39 +8,22 @@ import { Book } from '../models/book';
 })
 
 export class BookService {
-  arrBooks: Book[] = [
-    {
-      id: 1,
-      name: 'Taming the Tiger',
-      authors: ['James K.'],
-      isbn: '1482333098'
-    },
-    {
-      id: 2,
-      name: 'The Dog in the Park',
-      authors: ['Lebron I.', 'Stephen K.', 'Loonie K.'],
-      isbn: '4523993823'
-    },
-    {
-      id: 3,
-      name: 'Amber Stones',
-      authors: ['Kevin F.', 'Terence J.'],
-      isbn: '3123455099'
-    }
-  ];
+  serverUrl = 'http://localhost:3000'
+  constructor (private http:HttpClient){
 
-  removeDuplicates(){
-    // console.log(Object.values(this.arrBooks.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{})))
-    this.arrBooks = Object.values(this.arrBooks.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{}))
   }
-  deleteObj(id:number){
-    this.arrBooks = this.arrBooks.filter( obj => obj.id !== id);
+
+  getBooks():Observable<Book[]>{
+    return this.http.get<Book[]>(`${this.serverUrl}/books`)
   }
-  deleteAllObj(){
-    this.arrBooks = []
+  deleteBook(id:number){
+    return this.http.delete(`${this.serverUrl}/books/${id}`)
   }
-  getListOfBooks(){
-    return this.arrBooks;
+  createBook(book: Book) {
+    return this.http.post(`${this.serverUrl}/books`, book)
+  }
+  updateBook(id:number, book: Book) {
+    return this.http.put(`${this.serverUrl}/books/${id}`, book)
   }
   
 }

@@ -1,37 +1,73 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, of, Subscription, switchMap } from 'rxjs';
+import { Book } from '../../models/book';
 import { BookService } from '../../service/book.service';
-
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit{
-  constructor(private bookService: BookService, private router:Router){  }
-  ngOnInit() {  }
-
-  buttons = [
-    { name: "Add", callback: this.add},
-    { name: "Delete All", callback: this.deleteAll},
-  ];
-
-  executeFunction(mainFunction:(router:Router, bookService:BookService) => void){
-    mainFunction(this.router,this.bookService)
+  private subscription: Subscription | undefined 
+  bookArray: Book[] = [];
+  constructor(private bookService: BookService, private router:Router,){  }
+  ngOnInit() {
+    this.loadBooks()
+  
   }
-  editFunction(id:number){
+
+  
+
+  bookItemAction(event:{id:number,action:string}){
+    switch(event.action) {
+      case 'edit':
+        this.editBook(event.id)
+      break
+      case 'delete':
+        this.deleteBook(event.id)
+      break
+    }
+  }
+
+  commandBarAction(event:{action:string}){
+    switch(event.action) {
+      case 'add':
+        this.add()
+      break
+      case 'deleteAll':
+        this.deleteAll()
+      break
+    }
+  }
+
+  editBook(id:number){
     this.router.navigate(['book/form'], {queryParams: {id:id}})
   }
-  add(router:Router,bookService:BookService){
-    router.navigate(['book/form'])
-  }
-  deleteAll(router:Router,bookService:BookService){
-    bookService.deleteAllObj()
+
+  deleteBook(id:number){
+    this.bookService.deleteBook(id).pipe(
+      //this will update the UI when deleting a book item
+      switchMap(async () => this.loadBooks()),catchError(_err => of (null))
+    ).subscribe()
   }
 
-  getListOfBooks(){
-    return this.bookService.getListOfBooks();
+
+  add(){
+    this.router.navigate(['book/form'])
   }
+  deleteAll(){
+    console.log('book-list delte all')
+    this.bookArray.forEach(book => this.deleteBook(book.id))
+  }
+  
+  
+  loadBooks(){
+    this.subscription = this.bookService.getBooks().subscribe(book => {
+      this.bookArray = book
+    })
+  }
+
 
 }
 
