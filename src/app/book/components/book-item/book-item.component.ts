@@ -10,7 +10,7 @@ import { BookService } from '../../service/book.service';
 export class BookItemComponent {
   @Input() itemFromBookList : Book | undefined
   @Output() actionEmitter = new EventEmitter<any>();
-  constructor(/*private bookService: BookService*/){  }
+  constructor(){  }
   executeAction(id:number, action:string){
     this.actionEmitter.emit({id, action})
   }

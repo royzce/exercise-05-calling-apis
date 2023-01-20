@@ -10,14 +10,18 @@ import { BlogService } from '../../service/blog.service';
 export class BlogItemComponent {
   @Input() itemFromBlogList : Blog | undefined
   @Output() actionEmitter = new EventEmitter<any>();
-  constructor (private blogService:BlogService){}
-  editItem(id:number){
-    this.actionEmitter.emit(id)
+  constructor (){}
+
+  excuteAction(id:number, action:string){
+    this.actionEmitter.emit({id, action})
   }
-  deleteItem(id:number){
-    this.blogService.deleteObj(id)
-  }
-  sendAction(){
-    this.actionEmitter.emit(this.itemFromBlogList)
-  }
+  // editItem(id:number){
+  //   this.actionEmitter.emit(id)
+  // }
+  // deleteItem(id:number){
+  //   this.blogService.deleteObj(id)
+  // }
+  // sendAction(){
+  //   this.actionEmitter.emit(this.itemFromBlogList)
+  // }
 }

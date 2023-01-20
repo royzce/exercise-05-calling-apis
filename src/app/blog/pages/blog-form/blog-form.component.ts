@@ -1,6 +1,7 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Blog } from '../../models/blog';
 import { BlogService } from '../../service/blog.service';
 
 @Component({
@@ -8,9 +9,11 @@ import { BlogService } from '../../service/blog.service';
   templateUrl: './blog-form.component.html',
   styleUrls: ['./blog-form.component.scss']
 })
-export class BlogFormComponent implements AfterViewInit{
+export class BlogFormComponent implements AfterViewInit, OnInit{
+
   blogForm: FormGroup;
   commentsArray : FormArray;
+
   constructor(private formBuilder: FormBuilder, 
               private blogService: BlogService,
               private route: ActivatedRoute){
@@ -22,48 +25,70 @@ export class BlogFormComponent implements AfterViewInit{
     })
     this.commentsArray = this.blogForm.get('comments') as FormArray;
   }
-  id : number | undefined
+
+  id !: number
+  highestID!: number; 
+  
+  ngOnInit(): void {
+    this.blogService.getBlogs().subscribe((blog:Blog[]) => {
+      this.highestID = Math.max(...blog.map(b => b.id))
+    }) 
+  }
+
   ngAfterViewInit(): void {
     this.id = +this.route.snapshot.queryParams['id']
     this.populateFormById()
   }
+
   populateFormById(){
     if(this.id === undefined || Number.isNaN(this.id)){
       return
     }
     this.patchForm()
   }
+
   patchForm(){
-    this.blogForm.patchValue({
-      title: this.blogService.arrBlog.find(blog => blog.id === this.id)?.title,
-      description: this.blogService.arrBlog.find(blog => blog.id === this.id)?.description,
-      author: this.blogService.arrBlog.find(blog => blog.id === this.id)?.author,
+    this.blogService.getBlogs().subscribe((res:any) => {
+      let filteredBlog = res.find((blog: Blog) => blog.id === this.id)
+      this.blogForm.patchValue({
+        title: filteredBlog.title,
+        description: filteredBlog.description,
+        author: filteredBlog.author
+      })
     })
-    this.setCommets()
+    this.setComments()
   }
-  setCommets(){
+
+  setComments(){
     let control = <FormArray>this.blogForm.controls['comments']
-    this.blogService.arrBlog.find(blog => blog.id === this.id)?.comments.forEach(data => {
-      control.push(new FormControl(data))
+    this.blogService.getBlogs().subscribe((res:any) => {
+      res.find((blog: Blog) => blog.id == this.id).comments.
+      forEach((comments: any) => control.push(new FormControl(comments)))
     })
   }
-  deleteComment(i:number){
-    this.commentsArray.removeAt(i)
-  }
-  addComment(){
+
+  addComment = () => {
     this.commentsArray.push(new FormControl())
   }
+  deleteComment = (i:number) => {
+    this.commentsArray.removeAt(i)
+  }
+
   onSubmit(){
-    var generateId = this.id
-    if(Number.isNaN(generateId) || generateId === undefined){
-      generateId = this.blogService.arrBlog.length+1
+    let blog:any = {
+      title: this.blogForm.value.title,
+      description: this.blogForm.value.description,
+      author: this.blogForm.value.author,
+      comments: this.blogForm.value.comments
     }
-    this.blogService.arrBlog.push({
-      "id":generateId,
-      "title":this.blogForm.value.title,
-      "description":this.blogForm.value.description,
-      "author":this.blogForm.value.author,
-      "comments":this.blogForm.value.comments,})
-    this.blogService.removeDuplicates()
+    if(Number.isNaN(this.id) || this.id === undefined){
+      //create Blog
+      blog.id = this.highestID+1
+      this.blogService.createBlog(blog).subscribe()
+    }{
+      //update Blog
+      blog.id = this.id
+      this.blogService.updateBlog(this.id,blog).subscribe()
+    }
   }
 }

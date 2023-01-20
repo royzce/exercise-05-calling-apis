@@ -9,15 +9,15 @@ import { BookService } from '../../service/book.service';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit{
+
   private subscription: Subscription | undefined 
   bookArray: Book[] = [];
+
   constructor(private bookService: BookService, private router:Router,){  }
+
   ngOnInit() {
     this.loadBooks()
-  
   }
-
-  
 
   bookItemAction(event:{id:number,action:string}){
     switch(event.action) {
@@ -52,12 +52,10 @@ export class BookListComponent implements OnInit{
     ).subscribe()
   }
 
-
   add(){
     this.router.navigate(['book/form'])
   }
   deleteAll(){
-    console.log('book-list delte all')
     this.bookArray.forEach(book => this.deleteBook(book.id))
   }
   

@@ -10,8 +10,10 @@ import { max, scan } from 'rxjs/operators';
   styleUrls: ['./book-form.component.scss']
 })
 export class BookFormComponent implements AfterViewInit, OnInit {
+
   bookForm : FormGroup
   authorsArray  : FormArray
+
   constructor(private formBuilder : FormBuilder,
               private bookService: BookService,
               private route: ActivatedRoute){
@@ -19,20 +21,17 @@ export class BookFormComponent implements AfterViewInit, OnInit {
       name: [''],
       authors: this.formBuilder.array([]),
       isbn: ['']
-
     })
     this.authorsArray = this.bookForm.get('authors') as FormArray;
   }
+
   id !: number
   highestID!: number; 
   
   ngOnInit(): void {
     this.bookService.getBooks().subscribe((book:Book[]) => {
       this.highestID = Math.max(...book.map(b => b.id))
-
-      // console.log(this.highestID)
-    })
-    
+    }) 
   }
   ngAfterViewInit(): void {
     this.id = +this.route.snapshot.queryParams['id']
@@ -70,7 +69,6 @@ export class BookFormComponent implements AfterViewInit, OnInit {
   }
   
   onSubmit(){
-    // var generateId = this.id
     let book:any = {
       name: this.bookForm.value.name,
       authors: this.bookForm.value.authors,
