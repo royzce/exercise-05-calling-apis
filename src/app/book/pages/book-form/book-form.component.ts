@@ -23,7 +23,7 @@ export class BookFormComponent implements AfterViewInit, OnInit {
     })
     this.authorsArray = this.bookForm.get('authors') as FormArray;
   }
-  id : number | undefined
+  id !: number
   highestID!: number; 
   
   ngOnInit(): void {
@@ -70,27 +70,20 @@ export class BookFormComponent implements AfterViewInit, OnInit {
   }
   
   onSubmit(){
-    var generateId = this.id
+    // var generateId = this.id
     let book:any = {
       name: this.bookForm.value.name,
       authors: this.bookForm.value.authors,
       isbn: this.bookForm.value.isbn
     }
-    if(Number.isNaN(generateId) || generateId === undefined){
+    if(Number.isNaN(this.id) || this.id === undefined){
       //create Book
-      generateId = this.highestID+1
-      
-      book.id = generateId
+      book.id = this.highestID+1
       this.bookService.createBook(book).subscribe()
     }{
       //update Book
-
+      book.id = this.id
+      this.bookService.updateBook(this.id,book).subscribe()
     }
-    // this.bookService.arrBooks.push({
-    //   "id":generateId,
-    //   "name":this.bookForm.value.name,
-    //   "authors":this.bookForm.value.authors,
-    //   "isbn":this.bookForm.value.isbn,})
-    // this.bookService.removeDuplicates()
   }
 }

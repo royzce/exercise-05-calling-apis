@@ -1,13 +1,14 @@
 {
   "books": [
     {
-      "id": 1,
-      "name": "Onomatopaea",
+      "name": "The Power of Now",
       "authors": [
         "Miggy McFlurry",
-        "Teslo Nikky"
+        "Teslo Nikky",
+        "Jaylen B"
       ],
-      "isbn": "1237438447"
+      "isbn": "1237438449",
+      "id": 1
     },
     {
       "id": 2,
@@ -34,14 +35,6 @@
         "Natsu"
       ],
       "isbn": "3439823881"
-    },
-    {
-      "name": "Asero",
-      "authors": [
-        "Bertong Karding"
-      ],
-      "isbn": "3284973244",
-      "id": 5
     }
   ],
   "blogs": [
