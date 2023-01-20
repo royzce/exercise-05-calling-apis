@@ -1,0 +1,13 @@
+<div class="pt-5 d-flex justify-content-center ">
+    <form [formGroup]="loginForm" class="formWidth card p-3 bg-light" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" formControlName="email" class="form-control" placeholder="juan@gmail.com">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Password</label>
+            <input type="password" formControlName="name" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
